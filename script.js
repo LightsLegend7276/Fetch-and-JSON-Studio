@@ -4,26 +4,47 @@ function init() {
         response.json().then(function(json) {
             console.log(json);
             let div = document.getElementById("container");
-            for (let i = 0; i < json.length; i++) {
+            let h1 = document.querySelector("h1");
+            let sortedJson = sortAstronauts(json);
+            console.log(sortedJson);
+            h1.innerHTML += "  Count: " + json.length;
+            for (let i = 0; i < sortedJson.length; i++) {
                 div.innerHTML += `
                     <div class="astronaut">
                     <div class="bio">
-                    <h3>${json[i].firstName} ${json[i].lastName}</h3>
+                    <h3>${sortedJson[i].firstName} ${sortedJson[i].lastName}</h3>
                     <ul>
-                        <li>Hours in space: ${json[i].hoursInSpace}</li>
-                        <li>Active: ${json[i].active}</li>
-                        <li>Skills: Physician, Chemical Engineer</li>
+                        <li>Hours in space: ${sortedJson[i].hoursInSpace}</li>
+                        ${sortedJson[i].active ? `<li id="active">Active: ${sortedJson[i].active}</li>` : `<li>Active: ${sortedJson[i].active}</li>`}
+                        <li>Skills: ${sortedJson[i].skills}</li>
                     </ul>
                     </div>
-                    <img class="avatar" src=${json[i].picture}>
+                    <img class="avatar" src=${sortedJson[i].picture}>
                 </div>
                 `;
-            }
+            };
 
         });
-
-
     });
+
+    function sortAstronauts(array) {
+        let sortedArray = [];
+        let sortedAstros = [];
+        for (let i = 0; i < array.length; i++) {
+            sortedArray.push(array[i].hoursInSpace);
+        }
+        sortedArray.sort(function(a, b) { return b - a; });
+        for (let v = 0; v < sortedArray.length; v++) {
+            for (let j = 0; j < array.length; j++) {
+                if (sortedArray[v] === array[j].hoursInSpace) {
+                    sortedAstros.push(array[j]);
+                }
+            }
+
+        };
+
+        return sortedAstros;
+    }
 
 };
 
