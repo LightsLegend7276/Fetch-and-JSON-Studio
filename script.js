@@ -2,7 +2,6 @@ function init() {
 
     fetch("https://handlers.education.launchcode.org/static/astronauts.json").then(function(response) {
         response.json().then(function(json) {
-            console.log(json);
             let div = document.getElementById("container");
             let h1 = document.querySelector("h1");
             let sortedJson = sortAstronauts(json);
