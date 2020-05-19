@@ -5,7 +5,6 @@ function init() {
             let div = document.getElementById("container");
             let h1 = document.querySelector("h1");
             let sortedJson = sortAstronauts(json);
-            console.log(sortedJson);
             h1.innerHTML += "  Count: " + json.length;
             for (let i = 0; i < sortedJson.length; i++) {
                 div.innerHTML += `
@@ -22,7 +21,6 @@ function init() {
                 </div>
                 `;
             };
-
         });
     });
 
@@ -39,9 +37,7 @@ function init() {
                     sortedAstros.push(array[j]);
                 }
             }
-
         };
-
         return sortedAstros;
     }
 
